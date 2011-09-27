@@ -1,0 +1,15 @@
+<div id="modal">
+    <%= render :partial => partial %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('<%= elmt %>').click(function(e) {
+        e.preventDefault();
+        $('#modal').modal({
+            overlayId : 'modal-overlay',
+            containerId : 'modal-container',
+            overlayClose: true
+        });
+    });
+  });
+</script>

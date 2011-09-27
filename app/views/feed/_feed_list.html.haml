@@ -1,0 +1,7 @@
+- newly_created = nil if not defined?(newly_created)
+- if feeds.count > 0
+  = render :partial => 'feed/feed_list_fixed.html.haml', :locals => { :feeds => feeds }
+  .space_bar
+  = render :partial => 'feed/feed_meta.html.haml', :collection => feeds, :locals => { :newly_created => newly_created }
+- else
+  No feeds found. Why not add one?

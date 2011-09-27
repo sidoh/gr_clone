@@ -1,0 +1,12 @@
+- content_for :left_bar do
+  .top-buttons
+    = link_to 'R', refresh_all_feed_index_path, :id => 'refresh-rss', :class => 'button icon', :remote => true
+    = link_to '+', '#', :id => 'new-rss', :class => 'button icon'
+  .left-bar-content
+    #feed-list
+      = render :partial => 'feed_list', :locals => { :feeds => @feeds }
+
+#items_index
+  = render :partial => 'items_index', :collection => @items
+= render :partial => 'items_index_js'
+= render_modal 'modal_new', '#new-rss'

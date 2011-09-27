@@ -1,0 +1,11 @@
+%h3 Add RSS Feed
+
+- form_tag new_feed_path, :id => 'new-feed-form', :method => 'get', :remote => true do
+  %input{ :type => 'text', :name => 'feed_url', :placeholder => 'Enter a URL' }
+  .form-messages
+  .form-buttons
+    = link_to 'Cancel', '#', :class => 'button modal-close'
+    = link_to 'Go!', '#', :class => 'button submit-link'
+  .reset
+
+= render :partial => 'modal_new_js'

@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  $('.item_summary').click(function() {
+      var elmt = $('.description', this);
+
+      // Remove 'selected' class from everything
+      $('.item_summary').each(function() {
+        $(this).removeClass('selected');
+      });
+
+
+      // If the element that was clicked on is invisible, then show it, mark it as
+      // read, etc. Otherwise, just hide it.
+      if (! elmt.is(':visible')) {
+          // Hide everything else.
+          $('.item_summary .description').each(function() {
+            $(this).hide();
+          });
+
+          // Show this one and mark it as selected
+          $('.description', this).show();
+          $(this).addClass('selected');
+
+          // Mark it as read
+          var t_elmt = $('.title_bar', this);
+          if (t_elmt.hasClass('unread')) {
+              t_elmt.removeClass('unread');
+              $.ajax({
+                  url : ('/feed_item/' + t_elmt.attr('id') + '/mark_read'),
+                  success : function(json) {
+                      for (var id in json) {
+                        var nav_elmt = $('#' + id);
+
+                        if (json[id] > 0) {
+                            $('.unread_count', nav_elmt).html("(" + json[id] + ")");
+                            nav_elmt.addClass('has_unread');
+                        }
+                        else {
+                            $('.unread_count', nav_elmt).html('');
+                            nav_elmt.removeClass('has_unread');
+                        }
+                      }
+                  }
+              });
+          }
+      }
+      else {
+          elmt.hide();
+      }
+  });
+
+  $('.feed_link').click(function() {
+    $('.feed_link').each(function() {
+      $(this).removeClass('selected_link');
+    });
+
+    $(this).addClass('selected_link');
+    $('#items_index').html('<%= ajax_loading_gif %>');
+  });
+</script>

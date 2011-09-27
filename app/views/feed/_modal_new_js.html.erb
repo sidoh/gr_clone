@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  $('#new-feed-form').submit(function() {
+    var elmt = $(this).find('.form-messages');
+
+    elmt.html('<%= ajax_loading_gif %>');
+    elmt.removeClass('error');
+
+    elmt.ajaxComplete(null);
+    elmt.ajaxComplete(function(e, xhr, settings) {
+        var elmt = $(this);
+
+        try {
+            var json = JSON.parse(xhr.responseText);
+
+            if (typeof json['error'] !== 'undefined') {
+                elmt.addClass('error');
+                elmt.html(json['error']);
+            }
+        }
+        catch (Exception) {
+            $('#feed-list').html(xhr.responseText);
+            $.modal.close();
+        }
+    });
+
+  });
+</script>

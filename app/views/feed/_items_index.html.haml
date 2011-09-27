@@ -1,0 +1,9 @@
+.item_summary
+  .title_bar{ :class => items_index._css_read_class, :id => items_index._css_id }
+    .feed= items_index.feed.title
+    .title= items_index.title
+    .date= items_index.print_time
+    .reset
+  .description
+    .link= link_to items_index.title, items_index.link, :target => '_blank'
+    = raw items_index.description

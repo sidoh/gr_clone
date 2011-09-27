@@ -1,0 +1,12 @@
+- feed = feeds.first
+- unread = feed.user.unread_feed_items
+- classes = 'feed_link selected_link'
+- text = 'All Subscriptions'
+
+- if unread.count > 0
+  - classes << ' has_unread'
+  - text << "<span class=\"unread_count\">(#{unread.count})</span>"
+- else
+  - text << "<span class=\"unread_count\"></span>"
+
+= link_to raw(text), '/feed', :class => classes, :id => Feed._css_totals_id

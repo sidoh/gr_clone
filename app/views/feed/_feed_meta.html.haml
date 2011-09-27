@@ -1,0 +1,13 @@
+- feed_id = feed_meta._css_id
+- unread_count = feed_meta.unread_feed_items.count
+- classes = 'feed_link'
+- title = feed_meta.title
+
+- if unread_count > 0
+  - classes << ' has_unread'
+  - title << " <span class=\"unread_count\">(#{unread_count})</span>"
+
+= link_to raw(title), feed_path(:id => feed_meta.id), :remote => true, :class => classes, :id => feed_id
+
+- if defined? newly_created and newly_created == feed_meta
+  = render :partial => 'layouts/js_helpers/flash_me.html.erb', :locals => { :id => feed_id }

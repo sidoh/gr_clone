@@ -1,0 +1,4 @@
+$('#items_index').html(
+   "<%= escape_javascript(render :partial => 'items_index', :collection => @items) %>" +
+   "<%= escape_javascript(render :partial => 'items_index_js') %>"
+);
